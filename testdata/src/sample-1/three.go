@@ -1,0 +1,4 @@
+package sample
+
+func three() {
+}
