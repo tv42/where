@@ -23,6 +23,7 @@
   "Find Go identifier described in LOOKUP and find that location."
   (interactive "MLookup (importpath#ident): ")
 
+  ;; TODO: maybe support setting GOOS, GOARCH, build tags?
   (condition-case err
       (let ((file (go-where--call lookup)))
 	(push-mark)

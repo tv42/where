@@ -26,6 +26,12 @@ func locateTestData(t testing.TB) string {
 	return testDataDir
 }
 
+func buildWithTags(tags ...string) *build.Context {
+	c := build.Default
+	c.BuildTags = tags
+	return &c
+}
+
 type testCase struct {
 	buildCtx *build.Context
 	ident    string
@@ -46,6 +52,8 @@ func TestSimple(t *testing.T) {
 		{nil, "sample-1#seven.method", "src/sample-1/seven.go:7:17"},
 		{nil, "sample-1#seven.a.method", "src/sample-1/seven.go:12:21"},
 		{nil, "cgo-1#one", "src/cgo-1/cgo.go:5:6"},
+		{nil, "tags-1#one", "src/tags-1/one_std.go:5:5"},
+		{buildWithTags("xyzzy"), "tags-1#one", "src/tags-1/one_xyzzy.go:5:5"},
 	} {
 		buildCtxOrig := test.buildCtx
 		if buildCtxOrig == nil {
