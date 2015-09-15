@@ -51,8 +51,12 @@ func (imp myImporter) Import(importPath string) (*types.Package, error) {
 
 	filter := func(fi os.FileInfo) bool {
 		base := filepath.Base(fi.Name())
-		// TODO CgoFiles too?
 		for _, name := range pkgMeta.GoFiles {
+			if name == base {
+				return true
+			}
+		}
+		for _, name := range pkgMeta.CgoFiles {
 			if name == base {
 				return true
 			}
@@ -70,6 +74,7 @@ func (imp myImporter) Import(importPath string) (*types.Package, error) {
 
 	conf := types.Config{
 		IgnoreFuncBodies: true,
+		FakeImportC:      true,
 		// TODO maybe set Error here, to be more lenient?
 		Importer:                 imp,
 		DisableUnusedImportCheck: true,
