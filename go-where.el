@@ -19,6 +19,7 @@
 	      (signal 'go-where-error output)
 	    (replace-regexp-in-string "\n\\'" "" output)))))))
 
+;;;###autoload
 (defun go-where (lookup &optional other-window)
   "Find Go identifier described in LOOKUP and find that location."
   (interactive "MLookup (importpath#ident): ")
@@ -31,3 +32,5 @@
 	(godef--find-file-line-column file other-window))
     (file-error (message "Could not run go-where binary"))
     (go-where-error (message (cdr err)))))
+
+(provide 'go-where)
