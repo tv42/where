@@ -26,8 +26,8 @@ to source into other files -- see below for Emacs `org-mode`
 integration.
 
 As such, more value is placed on clarity over conciseness, and we do
-not ambiguous input; `go doc exec.Cmd.Run` may happen to find the
-right thing for simple cases, but `go-where os/exec#Cmd.Run` will
+not accept ambiguous input; `go doc exec.Cmd.Run` may happen to find
+the right thing for simple cases, but `go-where os/exec#Cmd.Run` will
 never pick the wrong definition.
 
 `go-where` differs from [`godef`](https://github.com/rogpeppe/godef)
